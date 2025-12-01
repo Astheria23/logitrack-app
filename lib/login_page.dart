@@ -10,6 +10,7 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  final formKey = GlobalKey<FormState>();
   @override
   bool isPasswordVisible = false;
   @override
@@ -22,7 +23,9 @@ class _LoginPageState extends State<LoginPage> {
         backgroundColor: Colors.blueAccent,
       ),
       body: Padding(
-        padding: const EdgeInsets.all(20.4),
+        padding: const EdgeInsets.all(20.0),
+        child: Form(
+    key: formKey, // Kunci yang tadi dibuat
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -33,43 +36,59 @@ class _LoginPageState extends State<LoginPage> {
             ),
             const SizedBox(height: 48),
 
-            TextField(
+            TextFormField(
               controller: emailController, // Hubungkan controller email
               decoration: const InputDecoration(
                 labelText: 'Email',
                 border: OutlineInputBorder(),
               ),
+              validator: (value) {
+              if (value == null || value.isEmpty) {
+                return 'Email tidak boleh kosong';
+              }
+              if (!value.contains('@')) {
+                return 'Masukkan format email yang valid';
+              }
+              return null;},
             ),
             const SizedBox(height: 16),
 
-            TextField(
-              // 1. Gunakan variabel state untuk properti obscureText
+            TextFormField(
+              controller: passwordController,
               obscureText: !isPasswordVisible,
               decoration: InputDecoration(
                 labelText: 'Password',
                 border: const OutlineInputBorder(),
-                // 2. Tambahkan ikon di akhir field
                 suffixIcon: IconButton(
                   icon: Icon(
-                    // Ganti ikon berdasarkan state
                     isPasswordVisible ? Icons.visibility : Icons.visibility_off,
                   ),
                   onPressed: () {
-                    // Panggil setState untuk mengubah state dan memicu rebuild UI
+ 
                     setState(() {
                       isPasswordVisible = !isPasswordVisible;
                     });
                   },
                 ),
               ),
-            ),
+              validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Password tidak boleh kosong';
+                  }
+                  if (value.length < 6) {
+                    return 'Password minimal harus 6 karakter';
+                  }
+                  return null; // Return null artinya valid
+              },
+                        ),
             SizedBox(
               width: double.infinity,
               height: 50,
               child: ElevatedButton(
                 onPressed: () async {
-                  // Tambahkan 'async' di sini
-                  // Membuat instance dari ApiService
+                  if (formKey.currentState!.validate()) {
+                  print('Form valid!');
+ 
                   final apiService = ApiService();
                   try {
                     final tasks = await apiService.fetchDeliveryTasks();
@@ -86,13 +105,16 @@ class _LoginPageState extends State<LoginPage> {
                       builder: (context) => const DashboardPage(),
                     ),
                   );
-                },
+                } else {
+                  print('Form tidak valid!');
+                }},
                 child: const Text('LOGIN', style: TextStyle(fontSize: 18)),
               ),
             ),
           ],
         ),
       ),
+    )
     );
   }
 }
