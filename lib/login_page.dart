@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:logitrack_app/dashboard_page.dart';
+import 'package:logitrack_app/api_service.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -11,12 +12,13 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   @override
   bool isPasswordVisible = false;
+  @override
   Widget build(BuildContext context) {
     final TextEditingController emailController = TextEditingController();
     final TextEditingController passwordController = TextEditingController();
     return Scaffold(
       appBar: AppBar(
-        title: const Text('LogiTrack - Login'), 
+        title: const Text('LogiTrack - Login'),
         backgroundColor: Colors.blueAccent,
       ),
       body: Padding(
@@ -65,9 +67,19 @@ class _LoginPageState extends State<LoginPage> {
               width: double.infinity,
               height: 50,
               child: ElevatedButton(
-                onPressed: () {
-                  print('Email: ${emailController.text}');
-                  print('Password: ${passwordController.text}');
+                onPressed: () async {
+                  // Tambahkan 'async' di sini
+                  // Membuat instance dari ApiService
+                  final apiService = ApiService();
+                  try {
+                    final tasks = await apiService.fetchDeliveryTasks();
+                    print('Berhasil mengambil data: ${tasks.length} item.');
+                    if (tasks.isNotEmpty) {
+                      print('Judul data pertama: ${tasks.first.title}');
+                    }
+                  } catch (e) {
+                    print(e);
+                  }
                   Navigator.push(
                     context,
                     MaterialPageRoute(

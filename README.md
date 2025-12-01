@@ -1,6 +1,4 @@
-# praktikum_1
-
-A new Flutter project.
+# Logitrack-app
 
 ## Getting Started
 
