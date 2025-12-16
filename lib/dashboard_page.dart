@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:logitrack_app/api_service.dart';
 import 'package:logitrack_app/delivery_task_model.dart';
 import 'auth_service.dart';
+import 'package:logitrack_app/login_page.dart';
 
 class DashboardPage extends StatefulWidget {
   const DashboardPage({super.key});
@@ -32,8 +33,14 @@ Widget build(BuildContext context) {
       actions: [
       IconButton(
         icon: const Icon(Icons.logout),
-        onPressed: () {
-          AuthService().signOut();
+        onPressed: () async {
+          await AuthService().signOut();
+          if (context.mounted) {
+                Navigator.of(context).pushAndRemoveUntil(
+                  MaterialPageRoute(builder: (context) => const LoginPage()),
+                  (route) => false, 
+                );
+              }
         },
       ),
       ],

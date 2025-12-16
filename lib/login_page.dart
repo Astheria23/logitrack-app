@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:logitrack_app/dashboard_page.dart';
 // import 'package:logitrack_app/api_service.dart'; // Ini boleh dihapus/comment kalau sudah tidak dipakai tes di sini
 import 'package:logitrack_app/auth_service.dart';
+import 'package:logitrack_app/register_page.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -144,6 +145,29 @@ class _LoginPageState extends State<LoginPage> {
                   child: const Text('LOGIN', style: TextStyle(fontSize: 18)),
                 ),
               ),
+                const SizedBox(height: 24),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Text("Belum punya akun? "),
+                    GestureDetector(
+                      onTap: () {
+                        // Navigasi ke halaman Register
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => const RegisterPage()),
+                        );
+                      },
+                      child: const Text(
+                        "Daftar di sini",
+                        style: TextStyle(
+                          color: Colors.blueAccent,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
             ],
           ),
         ),
