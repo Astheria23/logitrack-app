@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:logitrack_app/api_service.dart';
 import 'package:logitrack_app/delivery_task_model.dart';
+import 'auth_service.dart';
 
 class DashboardPage extends StatefulWidget {
   const DashboardPage({super.key});
@@ -29,12 +30,12 @@ Widget build(BuildContext context) {
       title: const Text('Dashboard Pengiriman'),
       backgroundColor: Colors.blueAccent,
       actions: [
-        IconButton(
-          icon: const Icon(Icons.logout),
-          onPressed: () {
-            Navigator.pop(context);
-          },
-        ),
+      IconButton(
+        icon: const Icon(Icons.logout),
+        onPressed: () {
+          AuthService().signOut();
+        },
+      ),
       ],
     ),
 

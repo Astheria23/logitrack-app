@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "696297687620",
+    "project_id": "logitrack-app-126b4",
+    "storage_bucket": "logitrack-app-126b4.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:696297687620:android:7f846290c357e2a3554a11",
+        "android_client_info": {
+          "package_name": "com.example.praktikum_1"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDpsXqIMNr6QOlrfHcuRk6KTamN43ERJb4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
