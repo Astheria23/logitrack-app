@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:logitrack_app/login_page.dart';
 import 'package:logitrack_app/firebase_options.dart';
 import 'package:logitrack_app/auth_gate.dart';
 

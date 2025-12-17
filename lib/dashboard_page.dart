@@ -3,6 +3,7 @@ import 'package:logitrack_app/api_service.dart';
 import 'package:logitrack_app/delivery_task_model.dart';
 import 'auth_service.dart';
 import 'package:logitrack_app/login_page.dart';
+import 'package:logitrack_app/delivery_detail_page.dart';
 
 class DashboardPage extends StatefulWidget {
   const DashboardPage({super.key});
@@ -73,6 +74,14 @@ Widget build(BuildContext context) {
                   ),
                   title: Text(task.title),
                   subtitle: Text('ID Tugas: ${task.id}'),
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => DeliveryDetailPage(task: task),
+                      ),
+                    );
+                  },
                 ),
               );
             },

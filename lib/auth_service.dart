@@ -1,10 +1,10 @@
-// lib/auth_service.dart
+
 import 'package:firebase_auth/firebase_auth.dart';
 
 class AuthService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
-  // Fungsi untuk Registrasi
+
   Future<User?> registerWithEmailPassword(String email, String password) async {
     try {
       UserCredential result = await _auth.createUserWithEmailAndPassword(
@@ -18,7 +18,7 @@ class AuthService {
     }
   }
 
-  // Fungsi untuk Login
+
   Future<User?> signInWithEmailPassword(String email, String password) async {
     try {
       UserCredential result = await _auth.signInWithEmailAndPassword(
@@ -32,11 +32,11 @@ class AuthService {
     }
   }
 
-  // Fungsi untuk Logout
+
   Future<void> signOut() async {
     await _auth.signOut();
   }
 
-  // Stream untuk memantau status otentikasi (PENTING BUAT AUTHGATE)
+
   Stream<User?> get user => _auth.authStateChanges();
 }
